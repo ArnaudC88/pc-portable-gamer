@@ -133,6 +133,8 @@ Budget : ${formData.budget}€
 ${formData.comments || 'Aucun commentaire'}
     `.trim();
     
+    console.log('📤 Envoi du formulaire...', formData);
+    
     try {
         const response = await fetch('https://formspree.io/f/xojnyloe', {
             method: 'POST',
@@ -148,20 +150,27 @@ ${formData.comments || 'Aucun commentaire'}
             })
         });
         
+        console.log('📥 Réponse reçue:', response.status, response.statusText);
+        
+        const data = await response.json();
+        console.log('📋 Données:', data);
+        
         loading.style.display = 'none';
         
         if (response.ok) {
+            console.log('✅ Succès!');
             success.style.display = 'block';
             form.reset();
             success.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } else {
-            throw new Error('Erreur lors de l\'envoi');
+            console.error('❌ Erreur HTTP:', data);
+            throw new Error(data.error || 'Erreur lors de l\'envoi');
         }
         
     } catch (err) {
+        console.error('❌ Erreur complète:', err);
         loading.style.display = 'none';
         error.style.display = 'block';
-        console.error('Erreur:', err);
         error.scrollIntoView({ behavior: 'smooth', block: 'center' });
     } finally {
         submitBtn.disabled = false;
