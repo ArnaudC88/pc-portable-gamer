@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Gestion PC Gamer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .login-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 1.05em;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .error-login {
+            display: none;
+            background: #ff6b6b;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Admin Section */
+        .admin-header {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-title {
+            color: #667eea;
+            font-size: 2em;
+        }
+
+        .btn-logout {
+            padding: 12px 25px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-logout:hover {
+            background: #ff5252;
+        }
+
+        .admin-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .admin-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .btn-add-pc {
+            padding: 12px 25px;
+            background: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-add-pc:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .admin-pc-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .admin-pc-card {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .admin-pc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .admin-pc-preview {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 15px;
+            align-items: start;
+        }
+
+        .admin-pc-image {
+            width: 120px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            background: #e0e0e0;
+        }
+
+        .admin-pc-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-edit, .btn-delete {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-edit {
+            background: #2196F3;
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background: #1976D2;
+        }
+
+        .btn-delete {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: #ff5252;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            color: #667eea;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        select {
+            cursor: pointer;
+            background: white;
+        }
+
+        @media (max-width: 768px) {
+            .admin-header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-pc-preview {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-pc-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page de connexion -->
+    <div class="login-container" id="loginPage">
+        <div class="login-header">
+            <div class="login-icon">🔐</div>
+            <h1>Connexion Admin</h1>
+        </div>
+
+        <div class="error-login" id="loginError">
+            Identifiants incorrects
+        </div>
+
+        <form id="loginForm" onsubmit="login(event)">
+            <div class="form-group">
+                <label for="username">Identifiant</label>
+                <input type="text" id="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" required>
+            </div>
+
+            <button type="submit" class="btn-submit">Se connecter</button>
+        </form>
+    </div>
+
+    <!-- Page Admin -->
+    <div class="admin-container" id="adminPage">
+        <div class="admin-header">
+            <h1 class="admin-title">🔧 Gestion des PC Gamer</h1>
+            <button class="btn-logout" onclick="logout()">Déconnexion</button>
+        </div>
+
+        <div class="admin-section">
+            <div class="admin-controls">
+                <h2 style="color: #667eea;">Liste des PC</h2>
+                <button class="btn-add-pc" onclick="openModal()">➕ Ajouter un PC</button>
+            </div>
+
+            <div class="admin-pc-list" id="admin-pc-list">
+                <!-- Liste admin des PC -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Ajout/Édition PC -->
+    <div id="pcModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Ajouter un PC</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+
+            <form id="pc-edit-form" onsubmit="savePc(event)">
+                <input type="hidden" id="edit-index">
+
+                <div class="form-group">
+                    <label for="pc-name">Nom du PC *</label>
+                    <input type="text" id="pc-name" required placeholder="Ex: ASUS TUF Gaming A15">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pc-price">Prix *</label>
+                        <input type="text" id="pc-price" required placeholder="Ex: 999€">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pc-badge">Badge</label>
+                        <input type="text" id="pc-badge" placeholder="Ex: MEILLEUR PRIX">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pc-badge-color">Couleur du badge</label>
+                    <select id="pc-badge-color">
+                        <option value="#667eea">Violet (défaut)</option>
+                        <option value="#ff6b6b">Rouge</option>
+                        <option value="#4caf50">Vert</option>
+                        <option value="#ffa726">Orange</option>
+                        <option value="#9c27b0">Mauve</option>
+                        <option value="#00bcd4">Cyan</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="pc-image">URL de l'image *</label>
+                    <input type="url" id="pc-image" required placeholder="https://exemple.com/image.jpg">
+                    <small style="color: #666;">Copiez l'URL d'une image depuis Amazon, Cdiscount, etc.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="pc-processor">Processeur *</label>
+                    <input type="text" id="pc-processor" required placeholder="Ex: AMD Ryzen 7 7735HS">
+                </div>
+
+                <div class="form-group">
+                    <label for="pc-gpu">Carte graphique *</label>
+                    <input type="text" id="pc-gpu" required placeholder="Ex: RTX 4060 8Go">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pc-ram">RAM *</label>
+                        <input type="text" id="pc-ram" required placeholder="Ex: 16 Go DDR5">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pc-storage">Stockage *</label>
+                        <input type="text" id="pc-storage" required placeholder="Ex: 512 Go SSD">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pc-screen">Écran *</label>
+                    <input type="text" id="pc-screen" required placeholder="Ex: 15.6\" FHD 144Hz">
+                </div>
+
+                <div class="form-group">
+                    <label for="pc-link">Lien d'achat *</label>
+                    <input type="url" id="pc-link" required placeholder="https://...">
+                </div>
+
+                <button type="submit" class="btn-submit">💾 Enregistrer</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Identifiants (À MODIFIER : remplacez par vos propres identifiants)
+        const ADMIN_USERNAME = "Arnaudc";
+        const ADMIN_PASSWORD = "63ArnaudC@123";
+
+        // Données par défaut
+        let pcList = [
+            {
+                name: "ASUS TUF Gaming A15",
+                price: "999€",
+                badge: "MEILLEUR RAPPORT QUALITÉ/PRIX",
+                badgeColor: "#667eea",
+                image: "https://m.media-amazon.com/images/I/81bc8mA3nKL._AC_SL1500_.jpg",
+                processor: "AMD Ryzen 7 7735HS",
+                gpu: "RTX 4060 8Go",
+                ram: "16 Go DDR5",
+                storage: "512 Go SSD",
+                screen: "15.6\" FHD 144Hz",
+                link: "#"
+            },
+            {
+                name: "Lenovo Legion Pro 5",
+                price: "1 499€",
+                badge: "TOP PERFORMANCE",
+                badgeColor: "#ff6b6b",
+                image: "https://m.media-amazon.com/images/I/71sJy9GZb+L._AC_SL1500_.jpg",
+                processor: "Intel i7-13700HX",
+                gpu: "RTX 4070 8Go",
+                ram: "32 Go DDR5",
+                storage: "1 To SSD",
+                screen: "16\" WQXGA 165Hz",
+                link: "#"
+            },
+            {
+                name: "MSI GF63 Thin",
+                price: "799€",
+                badge: "BUDGET MALIN",
+                badgeColor: "#ffa726",
+                image: "https://m.media-amazon.com/images/I/71h1c0Kl6qL._AC_SL1500_.jpg",
+                processor: "Intel i5-12450H",
+                gpu: "RTX 3050 4Go",
+                ram: "16 Go DDR4",
+                storage: "512 Go SSD",
+                screen: "15.6\" FHD 144Hz",
+                link: "#"
+            }
+        ];
+
+        // Charger depuis localStorage
+        const savedPCs = localStorage.getItem('pcGamerList');
+        if (savedPCs) {
+            pcList = JSON.parse(savedPCs);
+        }
+
+        // Vérifier si déjà connecté
+        const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
+        if (isLoggedIn === 'true') {
+            showAdminPage();
+        }
+
+        function login(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorEl = document.getElementById('loginError');
+            
+            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+                sessionStorage.setItem('adminLoggedIn', 'true');
+                showAdminPage();
+            } else {
+                errorEl.style.display = 'block';
+                setTimeout(() => {
+                    errorEl.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        function showAdminPage() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('adminPage').style.display = 'block';
+            displayAdminPCs();
+        }
+
+        function logout() {
+            sessionStorage.removeItem('adminLoggedIn');
+            document.getElementById('loginPage').style.display = 'block';
+            document.getElementById('adminPage').style.display = 'none';
+            document.getElementById('loginForm').reset();
+        }
+
+        function displayAdminPCs() {
+            const adminListEl = document.getElementById('admin-pc-list');
+            
+            adminListEl.innerHTML = pcList.map((pc, index) => `
+                <div class="admin-pc-card">
+                    <div class="admin-pc-header">
+                        <div class="admin-pc-preview">
+                            <img src="${pc.image}" alt="${pc.name}" class="admin-pc-image" onerror="this.src='https://via.placeholder.com/120x80?text=Image'">
+                            <div>
+                                <h3 style="color: #667eea; font-size: 1.2em; margin-bottom: 5px;">${pc.name}</h3>
+                                <div style="color: #764ba2; font-weight: 700; font-size: 1.3em;">${pc.price}</div>
+                                <div style="color: #666; font-size: 0.9em; margin-top: 5px;">
+                                    ${pc.processor} • ${pc.gpu}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="admin-pc-actions">
+                            <button class="btn-edit" onclick="editPc(${index})">✏️ Modifier</button>
+                            <button class="btn-delete" onclick="deletePc(${index})">🗑️ Supprimer</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openModal(index = null) {
+            const modal = document.getElementById('pcModal');
+            const form = document.getElementById('pc-edit-form');
+            
+            if (index !== null) {
+                document.getElementById('modal-title').textContent = 'Modifier le PC';
+                document.getElementById('edit-index').value = index;
+                
+                const pc = pcList[index];
+                document.getElementById('pc-name').value = pc.name;
+                document.getElementById('pc-price').value = pc.price;
+                document.getElementById('pc-badge').value = pc.badge;
+                document.getElementById('pc-badge-color').value = pc.badgeColor;
+                document.getElementById('pc-image').value = pc.image;
+                document.getElementById('pc-processor').value = pc.processor;
+                document.getElementById('pc-gpu').value = pc.gpu;
+                document.getElementById('pc-ram').value = pc.ram;
+                document.getElementById('pc-storage').value = pc.storage;
+                document.getElementById('pc-screen').value = pc.screen;
+                document.getElementById('pc-link').value = pc.link;
+            } else {
+                document.getElementById('modal-title').textContent = 'Ajouter un PC';
+                form.reset();
+                document.getElementById('edit-index').value = '';
+            }
+            
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('pcModal').style.display = 'none';
+        }
+
+        function savePc(event) {
+            event.preventDefault();
+            
+            const index = document.getElementById('edit-index').value;
+            const pc = {
+                name: document.getElementById('pc-name').value,
+                price: document.getElementById('pc-price').value,
+                badge: document.getElementById('pc-badge').value,
+                badgeColor: document.getElementById('pc-badge-color').value,
+                image: document.getElementById('pc-image').value,
+                processor: document.getElementById('pc-processor').value,
+                gpu: document.getElementById('pc-gpu').value,
+                ram: document.getElementById('pc-ram').value,
+                storage: document.getElementById('pc-storage').value,
+                screen: document.getElementById('pc-screen').value,
+                link: document.getElementById('pc-link').value
+            };
+            
+            if (index === '') {
+                pcList.push(pc);
+            } else {
+                pcList[index] = pc;
+            }
+            
+            localStorage.setItem('pcGamerList', JSON.stringify(pcList));
+            displayAdminPCs();
+            closeModal();
+            
+            alert('✅ PC enregistré avec succès !');
+        }
+
+        function editPc(index) {
+            openModal(index);
+        }
+
+        function deletePc(index) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer ce PC ?')) {
+                pcList.splice(index, 1);
+                localStorage.setItem('pcGamerList', JSON.stringify(pcList));
+                displayAdminPCs();
+            }
+        }
+
+        // Fermer la modal en cliquant à l'extérieur
+        window.onclick = function(event) {
+            const modal = document.getElementById('pcModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
