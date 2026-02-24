@@ -134,16 +134,16 @@ ${formData.comments || 'Aucun commentaire'}
     `.trim();
     
     try {
-        const response = await fetch('https://formspree.io/f/xwppodza', {
+        const response = await fetch('https://formspree.io/f/xojnyloe', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             },
             body: JSON.stringify({
-                email: 'chapelarnaud.pro@gmail.com',
                 name: formData.name,
+                email: formData.email,
                 message: emailBody,
-                _replyto: formData.email,
                 _subject: `Demande PC Gamer - ${formData.name}`
             })
         });
