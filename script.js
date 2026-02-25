@@ -1,50 +1,76 @@
 // Données par défaut des PC
 let pcList = [
     {
-        name: "ASUS TUF Gaming A15",
+        name: "LENOVO LOQ 15IRX10 -1 000€",
         price: "999€",
         badge: "MEILLEUR RAPPORT QUALITÉ/PRIX",
         badgeColor: "#667eea",
-        image: "https://m.media-amazon.com/images/I/81bc8mA3nKL._AC_SL1500_.jpg",
-        processor: "AMD Ryzen 7 7735HS",
-        gpu: "RTX 4060 8Go",
+        image: "https://www.cdiscount.com/pdt2/q/f/r/1/700x700/83je001qfr/rw/pc-portable-gamer-lenovo-loq-15irx10-15-6-fhd.jpg",
+        processor: "Core i5-13450HX",
+        gpu: "RTX 5060 100W",
         ram: "16 Go DDR5",
         storage: "512 Go SSD",
-        screen: "15.6\" FHD 144Hz",
-        link: "#"
+        screen: "15\" FHD 144hz",
+        link: "https://tidd.ly/4pFp7rf"
     },
     {
-        name: "Lenovo Legion Pro 5",
-        price: "1 499€",
-        badge: "TOP PERFORMANCE",
+        name: "Lenovo Legion 5 15IRX10",
+        price: "1 479€",
+        badge: "TOP PERFORMANCE -1 500€",
         badgeColor: "#ff6b6b",
-        image: "https://m.media-amazon.com/images/I/71sJy9GZb+L._AC_SL1500_.jpg",
-        processor: "Intel i7-13700HX",
-        gpu: "RTX 4070 8Go",
+        image: "https://www.cdiscount.com/pdt2/h/f/1/1/700x700/83ly007hfr/rw/pc-portable-gamer-lenovo-legion-5-15irx10-15-3.jpg",
+        processor: "Core i7-13650HX",
+        gpu: "RTX 5070 115W",
         ram: "32 Go DDR5",
-        storage: "1 To SSD",
-        screen: "16\" WQXGA 165Hz",
-        link: "#"
+        storage: "512 Go",
+        screen: "15,3\" 165 Hz IPS",
+        link: "https://tidd.ly/47TVBbg"
     },
     {
         name: "MSI GF63 Thin",
-        price: "799€",
-        badge: "BUDGET MALIN",
-        badgeColor: "#ffa726",
-        image: "https://m.media-amazon.com/images/I/71h1c0Kl6qL._AC_SL1500_.jpg",
-        processor: "Intel i5-12450H",
-        gpu: "RTX 3050 4Go",
+        price: "1 999€",
+        badge: "LE PLUS PUISSANT - 2 000€",
+        badgeColor: "#00c853",
+        image: "https://m.media-amazon.com/images/I/71ruDhbWgjL._AC_SL1500_.jpg",
+        processor: "Intel Ultra 7 255HX",
+        gpu: "Nvidia RTX5070Ti 12GB 140W",
         ram: "16 Go DDR4",
-        storage: "512 Go SSD",
-        screen: "15.6\" FHD 144Hz",
-        link: "#"
+        storage: "SSD 1TB",
+        screen: "16\" QHD+ 240Hz",
+        link: "https://amzn.to/4s7Hhmx"
+    },
+    {
+        name: "LENOVO LOQ 15IRX10",
+        price: "1 399€",
+        badge: "TOP CONFIGURATION -1 400€",
+        badgeColor: "#00bcd4",
+        image: "https://www.cdiscount.com/pdt2/m/f/r/1/700x700/83je003mfr/rw/pc-portable-gamer-lenovo-loq-15irx10-15-fhd-1.jpg",
+        processor: "Core i7-13650HX",
+        gpu: "RTX 5070 115W",
+        ram: "RAM 32 Go",
+        storage: "SSD 1 To",
+        screen: "15\" FHD 144hz",
+        link: "https://tidd.ly/4tVSsQU"
+    },
+    {
+        name: "Lenovo gaming LOQ 15IRX10",
+        price: "1 199 €",
+        badge: "BON PLAN DU MOMENT",
+        badgeColor: "#9c27b0",
+        image: "https://image.darty.com/darty?type=image&source=/market/2025/10/01/2025100100031211264_s01.jpg",
+        processor: "i7 13700HX",
+        gpu: "RTX 5060 100W",
+        ram: "24 Go DDR5",
+        storage: "1 To SSD",
+        screen: "15,6\" Full HD 144 Hz",
+        link: "https://tidd.ly/46re11X"
     }
 ];
 
 // Paramètres YouTube
 let youtubeSettings = {
-    videoId: '', // ID de la vidéo YouTube (ex: dQw4w9WgXcQ)
-    showVideo: false
+    videoId: "0jk5W8Y4fzo",
+    showVideo: true
 };
 
 // Charger depuis localStorage
@@ -56,25 +82,6 @@ if (savedPCs) {
 const savedYouTube = localStorage.getItem('youtubeSettings');
 if (savedYouTube) {
     youtubeSettings = JSON.parse(savedYouTube);
-}
-
-function switchTab(tabName) {
-    const tabs = document.querySelectorAll('.tab-content');
-    const buttons = document.querySelectorAll('.tab-button');
-    
-    tabs.forEach(tab => tab.classList.remove('active'));
-    buttons.forEach(btn => btn.classList.remove('active'));
-    
-    document.getElementById(tabName).classList.add('active');
-    
-    // Trouver et activer le bon bouton
-    buttons.forEach(btn => {
-        if (btn.getAttribute('data-tab') === tabName) {
-            btn.classList.add('active');
-        }
-    });
-    
-    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function displayLastUpdate() {
@@ -169,7 +176,7 @@ function displayPCs() {
         <div class="pc-card">
             <div class="pc-badge-top" style="background: ${pc.badgeColor}">${pc.badge}</div>
             <div class="pc-image">
-                <img src="${pc.image}" alt="${pc.name}" onerror="this.src='https://via.placeholder.com/400x400?text=Image+non+disponible'">
+                <img src="${pc.image}" alt="${pc.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x400?text=Image+non+disponible'">
             </div>
             <div class="pc-content">
                 <h3 class="pc-title">${pc.name}</h3>
@@ -199,15 +206,15 @@ async function submitForm(event) {
     const error = document.getElementById('error');
     const submitBtn = form.querySelector('.btn-submit');
     
-    success.style.display = 'none';
-    error.style.display = 'none';
-    loading.style.display = 'block';
-    submitBtn.disabled = true;
+    if (success) success.style.display = 'none';
+    if (error) error.style.display = 'none';
+    if (loading) loading.style.display = 'block';
+    if (submitBtn) submitBtn.disabled = true;
     
     const formData = {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
-        usage: document.getElementById('usage').value,
+        usage: document.getElementById('usage') ? document.getElementById('usage').value : 'non-spécifié',
         screen: document.getElementById('screen').value,
         budget: document.getElementById('budget').value,
         comments: document.getElementById('comments').value
@@ -230,7 +237,7 @@ Email : ${formData.email}
 
 🎮 Critères de recherche :
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Utilisation : ${usageLabels[formData.usage]}
+Utilisation : ${usageLabels[formData.usage] || formData.usage}
 Taille d'écran : ${formData.screen} pouces
 Budget : ${formData.budget}€
 
@@ -261,13 +268,15 @@ ${formData.comments || 'Aucun commentaire'}
         const data = await response.json();
         console.log('📋 Données:', data);
         
-        loading.style.display = 'none';
+        if (loading) loading.style.display = 'none';
         
         if (response.ok) {
             console.log('✅ Succès!');
-            success.style.display = 'block';
+            if (success) {
+                success.style.display = 'block';
+                success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
             form.reset();
-            success.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } else {
             console.error('❌ Erreur HTTP:', data);
             throw new Error(data.error || 'Erreur lors de l\'envoi');
@@ -275,11 +284,13 @@ ${formData.comments || 'Aucun commentaire'}
         
     } catch (err) {
         console.error('❌ Erreur complète:', err);
-        loading.style.display = 'none';
-        error.style.display = 'block';
-        error.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (loading) loading.style.display = 'none';
+        if (error) {
+            error.style.display = 'block';
+            error.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
     } finally {
-        submitBtn.disabled = false;
+        if (submitBtn) submitBtn.disabled = false;
     }
 }
 
