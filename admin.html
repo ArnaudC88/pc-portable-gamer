@@ -358,6 +358,36 @@
             <button class="btn-logout" onclick="logout()">Déconnexion</button>
         </div>
 
+        <!-- Section Vidéo YouTube -->
+        <div class="admin-section" style="margin-bottom: 30px;">
+            <h2 style="color: #667eea; margin-bottom: 20px;">🎬 Vidéo YouTube</h2>
+            
+            <form id="youtube-form" onsubmit="saveYouTubeSettings(event)">
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="show-video" style="width: auto; margin-right: 10px;">
+                        Afficher une vidéo dans la sélection PC
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="video-id">ID de la vidéo YouTube</label>
+                    <input type="text" id="video-id" placeholder="Ex: dQw4w9WgXcQ">
+                    <small style="color: #666; margin-top: 5px; display: block;">
+                        <strong>Comment trouver l'ID :</strong><br>
+                        1. Allez sur votre vidéo YouTube<br>
+                        2. Dans l'URL : https://youtube.com/watch?v=<strong style="color: #667eea;">dQw4w9WgXcQ</strong><br>
+                        3. Copiez SEULEMENT la partie après "v=" (les 11 caractères)<br>
+                        <br>
+                        <strong>⚠️ Important :</strong> Ne copiez pas l'URL complète, juste l'ID !
+                    </small>
+                </div>
+
+                <button type="submit" class="btn-submit">💾 Enregistrer la vidéo</button>
+            </form>
+        </div>
+
+        <!-- Section PC -->
         <div class="admin-section">
             <div class="admin-controls">
                 <h2 style="color: #667eea;">Liste des PC</h2>
@@ -455,8 +485,8 @@
 
     <script>
         // Identifiants (À MODIFIER : remplacez par vos propres identifiants)
-        const ADMIN_USERNAME = "Arnaudc";
-        const ADMIN_PASSWORD = "63ArnaudC@123";
+        const ADMIN_USERNAME = "arnaud";
+        const ADMIN_PASSWORD = "pcgamer2024";
 
         // Données par défaut
         let pcList = [
@@ -501,10 +531,21 @@
             }
         ];
 
+        // Paramètres YouTube
+        let youtubeSettings = {
+            videoId: '',
+            showVideo: false
+        };
+
         // Charger depuis localStorage
         const savedPCs = localStorage.getItem('pcGamerList');
         if (savedPCs) {
             pcList = JSON.parse(savedPCs);
+        }
+
+        const savedYouTube = localStorage.getItem('youtubeSettings');
+        if (savedYouTube) {
+            youtubeSettings = JSON.parse(savedYouTube);
         }
 
         // Vérifier si déjà connecté
@@ -535,6 +576,24 @@
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('adminPage').style.display = 'block';
             displayAdminPCs();
+            loadYouTubeSettings();
+        }
+
+        function loadYouTubeSettings() {
+            document.getElementById('show-video').checked = youtubeSettings.showVideo;
+            document.getElementById('video-id').value = youtubeSettings.videoId;
+        }
+
+        function saveYouTubeSettings(event) {
+            event.preventDefault();
+            
+            youtubeSettings = {
+                showVideo: document.getElementById('show-video').checked,
+                videoId: document.getElementById('video-id').value
+            };
+            
+            localStorage.setItem('youtubeSettings', JSON.stringify(youtubeSettings));
+            alert('✅ Paramètres vidéo enregistrés !');
         }
 
         function logout() {
@@ -626,6 +685,10 @@
                 pcList[index] = pc;
             }
             
+            // Enregistrer la date de modification
+            const now = new Date().toISOString();
+            localStorage.setItem('pcListLastUpdate', now);
+            
             localStorage.setItem('pcGamerList', JSON.stringify(pcList));
             displayAdminPCs();
             closeModal();
@@ -640,6 +703,11 @@
         function deletePc(index) {
             if (confirm('Êtes-vous sûr de vouloir supprimer ce PC ?')) {
                 pcList.splice(index, 1);
+                
+                // Enregistrer la date de modification
+                const now = new Date().toISOString();
+                localStorage.setItem('pcListLastUpdate', now);
+                
                 localStorage.setItem('pcGamerList', JSON.stringify(pcList));
                 displayAdminPCs();
             }

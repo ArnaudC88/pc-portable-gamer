@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma Sélection PC Gamer par Budget | Arnaud C</title>
+    <style>
+        :root {
+            --bg-primary: #f5f7fa;
+            --card-bg: #ffffff;
+            --text-primary: #1f2933;
+            --text-secondary: #616e7c;
+            --primary-green: #00c853;
+            --secondary-purple: #7c3aed;
+            --border-light: #e4e7eb;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a2e;
+            --card-bg: #16213e;
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --border-light: #2d3561;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--card-bg);
+            border: 2px solid var(--primary-green);
+            border-radius: 50px;
+            padding: 10px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            background: var(--card-bg);
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 30px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            background: var(--border-light);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .avatar-small {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-green);
+        }
+
+        .header-content h1 {
+            color: var(--primary-green);
+            font-size: 2.5em;
+            margin-bottom: 5px;
+            font-weight: 800;
+        }
+
+        .header-content p {
+            color: var(--text-secondary);
+            font-size: 1.1em;
+        }
+
+        .last-update {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-purple));
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            display: block;
+            box-shadow: var(--shadow-md);
+        }
+
+        .video-section {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .video-section h3 {
+            color: var(--primary-green);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .video-container {
+            max-width: 560px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 3px solid var(--primary-green);
+        }
+
+        .pc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .pc-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid var(--border-light);
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .pc-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-green);
+        }
+
+        .pc-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .pc-content {
+            padding: 25px;
+        }
+
+        .pc-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .pc-title {
+            color: var(--text-primary);
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .pc-price {
+            font-size: 2em;
+            font-weight: 800;
+            color: var(--secondary-purple);
+            margin-bottom: 15px;
+        }
+
+        .pc-specs {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .pc-specs li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-secondary);
+        }
+
+        .pc-specs li:last-child {
+            border-bottom: none;
+        }
+
+        .pc-specs strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .pc-link {
+            display: block;
+            text-align: center;
+            padding: 14px;
+            background: var(--primary-green);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+
+        .pc-link:hover {
+            background: var(--secondary-purple);
+            transform: translateY(-2px);
+        }
+
+        .admin-access {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            margin-bottom: 40px;
+            border: 2px solid var(--border-light);
+        }
+
+        .admin-access h3 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .admin-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 30px;
+            background: var(--secondary-purple);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .admin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .cta-bottom {
+            background: var(--card-bg);
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        .cta-bottom h2 {
+            color: var(--primary-green);
+            font-size: 2.2em;
+            margin-bottom: 15px;
+        }
+
+        .cta-bottom p {
+            color: var(--text-secondary);
+            font-size: 1.2em;
+            margin-bottom: 25px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 40px;
+            background: var(--primary-green);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 200, 83, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 200, 83, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-content h1 {
+                font-size: 1.8em;
+            }
+
+            .pc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <span id="theme-icon">🌙</span>
+        <span id="theme-text">Mode Sombre</span>
+    </button>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="page-header">
+            <a href="index.html" class="back-btn">← Retour à l'accueil</a>
+            <div class="header-content">
+                <img src="avatar.jpg" alt="Arnaud C" class="avatar-small">
+                <div>
+                    <h1>💻 Ma Sélection PC Gamer</h1>
+                    <p>Les meilleurs PC portables testés et approuvés selon votre budget</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Date de mise à jour -->
+        <div class="last-update" id="last-update"></div>
+
+        <!-- Vidéo YouTube -->
+        <div class="video-section" id="youtube-video-section" style="display: none;">
+            <h3>🎬 Ma Dernière Vidéo</h3>
+            <div class="video-container">
+                <div id="youtube-video-container" style="position: relative; padding-bottom: 56.25%; height: 0;"></div>
+            </div>
+        </div>
+
+        <!-- Grille PC -->
+        <div class="pc-grid" id="pc-list"></div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const current = body.getAttribute('data-theme');
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            document.getElementById('theme-icon').textContent = newTheme === 'light' ? '🌙' : '☀️';
+            document.getElementById('theme-text').textContent = newTheme === 'light' ? 'Mode Sombre' : 'Mode Clair';
+        }
+
+        // Charger le thème sauvegardé
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.body.setAttribute('data-theme', savedTheme);
+        if (savedTheme === 'dark') {
+            document.getElementById('theme-icon').textContent = '☀️';
+            document.getElementById('theme-text').textContent = 'Mode Clair';
+        }
+
+        // Initialiser l'affichage au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            displayPCs();
+        });
+    </script>
+</body>
+</html>

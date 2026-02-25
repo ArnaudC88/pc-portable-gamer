@@ -41,10 +41,21 @@ let pcList = [
     }
 ];
 
+// Paramètres YouTube
+let youtubeSettings = {
+    videoId: '', // ID de la vidéo YouTube (ex: dQw4w9WgXcQ)
+    showVideo: false
+};
+
 // Charger depuis localStorage
 const savedPCs = localStorage.getItem('pcGamerList');
 if (savedPCs) {
     pcList = JSON.parse(savedPCs);
+}
+
+const savedYouTube = localStorage.getItem('youtubeSettings');
+if (savedYouTube) {
+    youtubeSettings = JSON.parse(savedYouTube);
 }
 
 function switchTab(tabName) {
@@ -55,15 +66,105 @@ function switchTab(tabName) {
     buttons.forEach(btn => btn.classList.remove('active'));
     
     document.getElementById(tabName).classList.add('active');
-    event.target.classList.add('active');
+    
+    // Trouver et activer le bon bouton
+    buttons.forEach(btn => {
+        if (btn.getAttribute('data-tab') === tabName) {
+            btn.classList.add('active');
+        }
+    });
     
     window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function displayLastUpdate() {
+    const lastUpdate = localStorage.getItem('pcListLastUpdate');
+    const lastUpdateEl = document.getElementById('last-update');
+    
+    if (lastUpdate && lastUpdateEl) {
+        const date = new Date(lastUpdate);
+        const options = { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric', 
+            hour: '2-digit', 
+            minute: '2-digit'
+        };
+        lastUpdateEl.textContent = `Dernière mise à jour : ${date.toLocaleDateString('fr-FR', options)}`;
+    }
+}
+
+function displayYouTubeVideo() {
+    const videoSection = document.getElementById('youtube-video-section');
+    const videoContainer = document.getElementById('youtube-video-container');
+    
+    if (youtubeSettings.showVideo && youtubeSettings.videoId) {
+        videoSection.style.display = 'block';
+        
+        // Nettoyer l'ID de la vidéo
+        let cleanVideoId = youtubeSettings.videoId.trim();
+        
+        // Si l'utilisateur a collé une URL complète, extraire l'ID
+        if (cleanVideoId.includes('youtube.com') || cleanVideoId.includes('youtu.be')) {
+            const urlMatch = cleanVideoId.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+            if (urlMatch) {
+                cleanVideoId = urlMatch[1];
+            }
+        }
+        
+        // Nettoyer l'ID
+        cleanVideoId = cleanVideoId.replace(/[^a-zA-Z0-9_-]/g, '').substring(0, 11);
+        
+        console.log('📹 ID vidéo YouTube:', cleanVideoId);
+        
+        // Créer un lien cliquable vers YouTube
+        videoContainer.innerHTML = `
+            <a href="https://www.youtube.com/watch?v=${cleanVideoId}" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+                      display: block; text-decoration: none; background: #000;">
+                <div style="position: relative; width: 100%; height: 100%; 
+                            background-image: url(https://i.ytimg.com/vi/${cleanVideoId}/maxresdefault.jpg); 
+                            background-size: cover; background-position: center;">
+                    
+                    <!-- Overlay sombre au hover -->
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+                                background: rgba(0,0,0,0.3); opacity: 0; transition: opacity 0.3s;"
+                         onmouseover="this.style.opacity='1'" 
+                         onmouseout="this.style.opacity='0'"></div>
+                    
+                    <!-- Bouton Play YouTube -->
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+                                width: 100px; height: 70px; background: #ff0000; 
+                                border-radius: 20px; display: flex; align-items: center; justify-content: center;
+                                transition: all 0.3s; box-shadow: 0 10px 30px rgba(255,0,0,0.4);"
+                         onmouseover="this.style.transform='translate(-50%, -50%) scale(1.1)'" 
+                         onmouseout="this.style.transform='translate(-50%, -50%) scale(1)'">
+                        <!-- Triangle Play -->
+                        <div style="width: 0; height: 0; border-left: 30px solid white; 
+                                    border-top: 18px solid transparent; border-bottom: 18px solid transparent; 
+                                    margin-left: 10px;"></div>
+                    </div>
+                    
+                    <!-- Texte "Voir sur YouTube" -->
+                    <div style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+                                background: rgba(0,0,0,0.8); color: white; padding: 12px 30px; 
+                                border-radius: 25px; font-weight: 600; font-size: 1.1em;
+                                box-shadow: 0 5px 20px rgba(0,0,0,0.3);">
+                        🎬 Voir la vidéo sur YouTube
+                    </div>
+                </div>
+            </a>
+        `;
+    } else {
+        videoSection.style.display = 'none';
+    }
 }
 
 function displayPCs() {
     const pcListEl = document.getElementById('pc-list');
     
-    // Affichage public
     pcListEl.innerHTML = pcList.map((pc, index) => `
         <div class="pc-card">
             <img src="${pc.image}" alt="${pc.name}" class="pc-image" onerror="this.src='https://via.placeholder.com/400x200?text=Image+non+disponible'">
@@ -82,6 +183,9 @@ function displayPCs() {
             </div>
         </div>
     `).join('');
+    
+    displayLastUpdate();
+    displayYouTubeVideo();
 }
 
 async function submitForm(event) {
@@ -178,4 +282,13 @@ ${formData.comments || 'Aucun commentaire'}
 }
 
 // Initialisation
-displayPCs();
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialiser la date de dernière mise à jour si elle n'existe pas
+    if (!localStorage.getItem('pcListLastUpdate')) {
+        const now = new Date().toISOString();
+        localStorage.setItem('pcListLastUpdate', now);
+    }
+    
+    // Afficher les PC et la vidéo
+    displayPCs();
+});
