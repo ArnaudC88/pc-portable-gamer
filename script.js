@@ -167,10 +167,12 @@ function displayPCs() {
     
     pcListEl.innerHTML = pcList.map((pc, index) => `
         <div class="pc-card">
-            <img src="${pc.image}" alt="${pc.name}" class="pc-image" onerror="this.src='https://via.placeholder.com/400x200?text=Image+non+disponible'">
+            <div class="pc-badge-top" style="background: ${pc.badgeColor}">${pc.badge}</div>
+            <div class="pc-image">
+                <img src="${pc.image}" alt="${pc.name}" onerror="this.src='https://via.placeholder.com/400x400?text=Image+non+disponible'">
+            </div>
             <div class="pc-content">
-                <span class="pc-badge" style="background: ${pc.badgeColor}">${pc.badge}</span>
-                <h3>${pc.name}</h3>
+                <h3 class="pc-title">${pc.name}</h3>
                 <div class="pc-price">${pc.price}</div>
                 <ul class="pc-specs">
                     <li><strong>Processeur:</strong> ${pc.processor}</li>
