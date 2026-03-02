@@ -3,7 +3,7 @@ let pcList = [
     {
         name: "LENOVO LOQ 15IRX10 -1 000€",
         price: "999€",
-        badge: "MEILLEUR RAPPORT QUALITÉ/PRIX",
+        badge: "MEILLEUR RAPPORT QUALITÉ-PRIX",
         badgeColor: "#667eea",
         image: "https://www.cdiscount.com/pdt2/q/f/r/1/700x700/83je001qfr/rw/pc-portable-gamer-lenovo-loq-15irx10-15-6-fhd.jpg",
         processor: "Core i5-13450HX",
