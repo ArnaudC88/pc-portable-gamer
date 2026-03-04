@@ -84,21 +84,40 @@
         }
 
         .social-proof {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
+            display: inline-block;
+            background: var(--card-bg);
+            border: 2px solid var(--primary-green);
+            border-radius: 20px;
+            padding: 25px 40px;
             margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 255, 65, 0.2);
+        }
+
+        .proof-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .proof-row {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
             flex-wrap: wrap;
         }
 
-        .proof-badge {
-            background: var(--card-bg);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-weight: 700;
-            border: 2px solid var(--primary-green);
-            box-shadow: 0 4px 15px rgba(0, 255, 65, 0.2);
+        .proof-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .proof-icon {
+            font-size: 1.5em;
         }
 
         .btn-youtube {
@@ -125,7 +144,7 @@
         /* Section Headers */
         .section-header {
             text-align: center;
-            margin: 80px 0 50px;
+            margin: 40px 0 30px;
         }
 
         .section-header h2 {
@@ -142,7 +161,7 @@
         /* Video Section */
         .video-container {
             max-width: 450px;
-            margin: 0 auto 80px;
+            margin: 0 auto 60px;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 15px 50px rgba(0, 255, 65, 0.2);
@@ -420,8 +439,8 @@
             }
 
             .social-proof {
-                flex-direction: column;
-                gap: 15px;
+                width: 90%;
+                padding: 20px 25px;
             }
             
             .btn-youtube {
@@ -450,29 +469,56 @@
                 parfaite selon votre budget et vos besoins.
             </p>
 
-            <div class="badge-24h">
-                <span style="font-size: 1.5em;">⚡</span>
-                Réponse sous 24h
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 30px 0;">
+                <a href="https://youtube.com/@arnaudc88?si=DkFurV56E0qP6JvN" target="_blank" class="btn-youtube">
+                    📺 Découvrir ma chaîne YouTube
+                </a>
+                
+                <a href="#formulaire" class="btn-youtube" style="background: var(--secondary-purple); color: white; flex-direction: column; gap: 5px; padding: 12px 30px;">
+                    <span style="font-size: 1em;">📩 Demander un conseil</span>
+                    <span style="font-size: 0.85em; opacity: 0.9;">⚡ Réponse sous 24h</span>
+                </a>
             </div>
 
             <div class="social-proof">
-                <div class="proof-badge">🎥 +100K abonnés</div>
-                <div class="proof-badge">💻 +500 PC recommandés</div>
-                <div class="proof-badge">💸 Bons plans vérifiés</div>
+                <div class="proof-list">
+                    <div class="proof-row">
+                        <div class="proof-item">
+                            <span class="proof-icon">🎥</span>
+                            <span>+100K abonnés YouTube</span>
+                        </div>
+                        <div class="proof-item">
+                            <span class="proof-icon">💻</span>
+                            <span>+500 PC recommandés</span>
+                        </div>
+                    </div>
+                    <div class="proof-item">
+                        <span class="proof-icon">💸</span>
+                        <span>Bons plans vérifiés</span>
+                    </div>
+                </div>
             </div>
-
-            <a href="https://youtube.com/@arnaudc88?si=DkFurV56E0qP6JvN" target="_blank" class="btn-youtube">
-                📺 Découvrir ma chaîne YouTube
-            </a>
-            
-            <a href="#formulaire" class="btn-youtube" style="background: var(--secondary-purple); color: white; margin-left: 15px;">
-                📩 Demander un conseil
-            </a>
         </section>
+
+        <!-- Video Section -->
+        <div class="section-header">
+            <h2>🎬 Ma Dernière Vidéo</h2>
+            <p>Découvrez mes tests et conseils en vidéo</p>
+        </div>
+
+        <div class="video-container">
+            <div class="video-wrapper">
+                <a href="https://www.youtube.com/watch?v=0jk5W8Y4fzo" target="_blank" class="video-link">
+                    <img src="https://i.ytimg.com/vi/0jk5W8Y4fzo/maxresdefault.jpg" alt="Vidéo YouTube" class="video-thumbnail">
+                    <div class="play-button"></div>
+                </a>
+            </div>
+        </div>
 
         <!-- PC Selection -->
         <div class="section-header">
             <h2>💻 Ma Sélection PC Gamer par Budget</h2>
+	    <h1>Dernière mise à jour 4 Mars 2026 </h1>
             <p>Les meilleurs PC portables testés et approuvés</p>
         </div>
 
@@ -575,21 +621,6 @@
                     </ul>
                     <a href="https://tidd.ly/3N0by7R" target="_blank" class="pc-link">Voir l'offre →</a>
                 </div>
-            </div>
-        </div>
-
-        <!-- Video Section -->
-        <div class="section-header">
-            <h2>🎬 Ma Dernière Vidéo</h2>
-            <p>Découvrez mes tests et conseils en vidéo</p>
-        </div>
-
-        <div class="video-container">
-            <div class="video-wrapper">
-                <a href="https://www.youtube.com/watch?v=0jk5W8Y4fzo" target="_blank" class="video-link">
-                    <img src="https://i.ytimg.com/vi/0jk5W8Y4fzo/maxresdefault.jpg" alt="Vidéo YouTube" class="video-thumbnail">
-                    <div class="play-button"></div>
-                </a>
             </div>
         </div>
 
