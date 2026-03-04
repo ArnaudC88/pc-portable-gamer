@@ -4,31 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Expert PC gamer depuis 2020. +100k abonnés YouTube. Je vous aide à choisir le meilleur PC portable gamer selon votre budget sans vous faire arnaquer.">
-    <title>Quel PC Portable Gamer Choisir en 2026 ? | Guide Expert par Arnaud C</title>
+    <title>Arnaud C - Expert PC Portable Gamer | Conseils & Bons Plans</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
         :root {
-            --bg-primary: #f5f7fa;
-            --card-bg: #ffffff;
-            --text-primary: #1f2933;
-            --text-secondary: #616e7c;
-            --primary-green: #00c853;
-            --secondary-purple: #7c3aed;
-            --border-light: #e4e7eb;
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-            --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
-        }
-
-        [data-theme="dark"] {
-            --bg-primary: #1a1a2e;
-            --card-bg: #16213e;
+            --bg-primary: #1a1f3a;
+            --card-bg: #2d3561;
             --text-primary: #e0e0e0;
             --text-secondary: #b0b0b0;
-            --border-light: #2d3561;
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.3);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
-            --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+            --primary-green: #00ff41;
+            --secondary-purple: #9d4edd;
+            --border-light: #404870;
         }
 
         * {
@@ -39,85 +25,62 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg-primary);
+            background: linear-gradient(135deg, #1a1f3a 0%, #0f1729 100%);
             color: var(--text-primary);
             line-height: 1.6;
-            transition: all 0.3s ease;
-            padding: 20px;
-            padding-bottom: 100px;
-        }
-
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: var(--card-bg);
-            border: 2px solid var(--primary-green);
-            border-radius: 50px;
-            padding: 10px 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .theme-toggle:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 20px;
         }
 
+        /* Hero Section */
         .hero {
-            background: var(--card-bg);
-            padding: 50px 40px;
-            border-radius: 20px;
-            box-shadow: var(--shadow-lg);
-            margin-bottom: 40px;
             text-align: center;
-        }
-
-        .hero-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
+            padding: 60px 20px;
+            margin-bottom: 60px;
         }
 
         .avatar {
-            width: 120px;
-            height: 120px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
-            border: 4px solid var(--primary-green);
-            box-shadow: 0 8px 20px rgba(0, 200, 83, 0.3);
+            border: 5px solid var(--primary-green);
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.5);
+            margin-bottom: 30px;
         }
 
-        .hero-title h1 {
-            color: var(--text-primary);
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 800;
-            line-height: 1.2;
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .hero-subtitle {
-            color: var(--text-secondary);
+        .hero-description {
             font-size: 1.2em;
-            font-weight: 500;
+            color: var(--text-secondary);
+            max-width: 900px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
         }
 
-        .hero-subtitle strong {
-            color: var(--primary-green);
+        .badge-24h {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.2em;
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+            margin-bottom: 30px;
         }
 
         .social-proof {
@@ -129,138 +92,240 @@
         }
 
         .proof-badge {
-            background: linear-gradient(135deg, var(--primary-green), var(--secondary-purple));
+            background: var(--card-bg);
             color: white;
             padding: 15px 30px;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 1em;
-            box-shadow: var(--shadow-md);
+            border: 2px solid var(--primary-green);
+            box-shadow: 0 4px 15px rgba(0, 255, 65, 0.2);
         }
 
-        .btn-primary {
+        .btn-youtube {
             display: inline-flex;
             align-items: center;
             gap: 10px;
             padding: 16px 40px;
             background: var(--primary-green);
-            color: white;
+            color: #000;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 700;
             font-size: 1.1em;
-            border: none;
-            cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(0, 200, 83, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 255, 65, 0.3);
+            margin-top: 20px;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 200, 83, 0.4);
+        .btn-youtube:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 255, 65, 0.5);
         }
 
-        .quiz-section {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: var(--shadow-md);
-            margin-bottom: 40px;
-        }
-
-        .quiz-section h2 {
+        /* Section Headers */
+        .section-header {
             text-align: center;
+            margin: 80px 0 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5em;
             color: var(--primary-green);
-            font-size: 2.2em;
-            margin-bottom: 15px;
-        }
-
-        .quiz-subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            margin-bottom: 35px;
-            font-size: 1.15em;
-        }
-
-        .usage-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .usage-card {
-            padding: 35px 25px;
-            background: var(--card-bg);
-            border: 3px solid var(--border-light);
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-        }
-
-        .usage-card:hover {
-            border-color: var(--primary-green);
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .usage-card.selected {
-            border-color: var(--primary-green);
-            background: linear-gradient(135deg, rgba(0, 200, 83, 0.08), rgba(124, 58, 237, 0.08));
-            box-shadow: var(--shadow-lg);
-        }
-
-        .usage-icon {
-            font-size: 3.5em;
-            margin-bottom: 15px;
-        }
-
-        .usage-title {
-            font-size: 1.4em;
-            font-weight: 700;
-            color: var(--text-primary);
             margin-bottom: 10px;
         }
 
-        .usage-desc {
+        .section-header p {
             color: var(--text-secondary);
-            font-size: 1em;
+            font-size: 1.1em;
         }
 
-        .pc-selection-card {
-            padding: 35px 25px;
-            background: var(--card-bg);
-            border: 3px solid var(--primary-green);
-            border-radius: 15px;
-            text-align: center;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .pc-selection-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            background: linear-gradient(135deg, rgba(0, 200, 83, 0.05), rgba(124, 58, 237, 0.05));
-        }
-
-        .form-section {
-            background: var(--card-bg);
-            padding: 40px;
+        /* Video Section */
+        .video-container {
+            max-width: 450px;
+            margin: 0 auto 80px;
             border-radius: 20px;
-            box-shadow: var(--shadow-md);
-            margin-bottom: 40px;
-            display: none;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0, 255, 65, 0.2);
+            border: 3px solid var(--primary-green);
         }
 
-        .form-section.active {
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+
+        .video-link {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: block;
-            animation: slideIn 0.5s;
+            background: #000;
+            text-decoration: none;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .video-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 70px;
+            background: #ff0000;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.5);
+        }
+
+        .video-link:hover .play-button {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .play-button::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 30px solid white;
+            border-top: 18px solid transparent;
+            border-bottom: 18px solid transparent;
+            margin-left: 8px;
+        }
+
+        /* PC Grid */
+        .pc-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .pc-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid var(--border-light);
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .pc-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 255, 65, 0.3);
+            border-color: var(--primary-green);
+        }
+
+        .pc-badge-top {
+            padding: 12px 20px;
+            color: white;
+            font-size: 0.85em;
+            font-weight: 700;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pc-image {
+            width: 100%;
+            height: 0;
+            padding-bottom: 100%;
+            position: relative;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+
+        .pc-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .pc-content {
+            padding: 25px;
+        }
+
+        .pc-title {
+            color: var(--primary-green);
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .pc-price {
+            font-size: 2em;
+            font-weight: 800;
+            color: var(--secondary-purple);
+            margin-bottom: 15px;
+        }
+
+        .pc-specs {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .pc-specs li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-secondary);
+            font-size: 0.95em;
+        }
+
+        .pc-specs li:last-child {
+            border-bottom: none;
+        }
+
+        .pc-specs strong {
+            color: var(--text-primary);
+        }
+
+        .pc-link {
+            display: block;
+            text-align: center;
+            padding: 14px;
+            background: var(--primary-green);
+            color: #000;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+
+        .pc-link:hover {
+            background: var(--secondary-purple);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Form Section */
+        .form-section {
+            max-width: 800px;
+            margin: 0 auto 80px;
+            background: var(--card-bg);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            border: 2px solid var(--primary-green);
+        }
+
+        .form-section h2 {
+            text-align: center;
+            color: var(--primary-green);
+            margin-bottom: 30px;
+            font-size: 2em;
         }
 
         .form-group {
@@ -280,7 +345,7 @@
             border: 2px solid var(--border-light);
             border-radius: 10px;
             font-size: 1em;
-            background: var(--card-bg);
+            background: var(--bg-primary);
             color: var(--text-primary);
             transition: all 0.3s;
         }
@@ -288,11 +353,29 @@
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: var(--primary-green);
-            box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.1);
+            box-shadow: 0 0 0 3px rgba(0, 255, 65, 0.1);
         }
 
-        .affiliate-box {
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(0, 200, 83, 0.1));
+        .btn-submit {
+            width: 100%;
+            padding: 18px;
+            background: var(--primary-green);
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 255, 65, 0.4);
+        }
+
+        .bonus-box {
+            background: rgba(157, 78, 237, 0.2);
             padding: 20px;
             border-radius: 12px;
             border-left: 4px solid var(--secondary-purple);
@@ -300,7 +383,7 @@
             text-align: center;
         }
 
-        .affiliate-box strong {
+        .bonus-box strong {
             color: var(--primary-green);
             font-size: 1.1em;
         }
@@ -308,97 +391,68 @@
         .success-msg {
             display: none;
             background: var(--primary-green);
-            color: white;
+            color: #000;
             padding: 30px;
             border-radius: 15px;
             text-align: center;
             margin-top: 20px;
+            font-weight: 600;
         }
 
-        .sticky-cta {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--primary-green);
-            padding: 15px 20px;
-            box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
-            z-index: 999;
-            display: none;
-        }
-
-        .sticky-cta button {
-            width: 100%;
-            padding: 14px;
-            background: white;
-            color: var(--primary-green);
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1em;
-            font-weight: 700;
-            cursor: pointer;
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .pc-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
-            .hero {
-                padding: 30px 20px;
+            h1 {
+                font-size: 2em;
             }
 
-            .hero-title h1 {
-                font-size: 1.8em;
-            }
-
-            .hero-header {
-                flex-direction: column;
-            }
-
-            .usage-grid {
+            .pc-grid {
                 grid-template-columns: 1fr;
             }
 
-            .sticky-cta {
-                display: block;
+            .form-section {
+                padding: 30px 20px;
+            }
+
+            .social-proof {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn-youtube {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                margin-left: 0 !important;
+                margin-top: 10px;
             }
         }
+
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GL2CF6DGSG">
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-GL2CF6DGSG');
-</script>
 </head>
-<body data-theme="light">
-    <button class="theme-toggle" onclick="toggleTheme()">
-        <span id="theme-icon">🌙</span>
-        <span id="theme-text">Mode Sombre</span>
-    </button>
-
+<body>
     <div class="container">
-        <!-- Hero -->
+        <!-- Hero Section -->
         <section class="hero">
-            <div class="hero-header">
-                <img src="avatar.jpg" alt="Arnaud C Expert PC Gamer" class="avatar">
-                <div class="hero-title">
-                    <h1>Arnaud C - Expert PC Portable Gamer</h1>
-                    <p class="hero-subtitle">
-                        Passionné de gaming et de technologie, je vous aide à faire le bon choix pour votre PC portable gamer. 
-                        Tests détaillés, comparatifs, bons plans et conseils personnalisés : tout pour trouver la configuration 
-                        parfaite selon votre budget et vos besoins.
-                    </p>
-                </div>
-            </div>
+            <img src="avatar.jpg" alt="Arnaud C" class="avatar">
+            <h1>Arnaud C - Expert PC Portable Gamer</h1>
+            <p class="hero-description">
+                Passionné de gaming et de technologie, je vous aide à faire le bon choix pour votre PC portable gamer. 
+                Tests détaillés, comparatifs, bons plans et conseils personnalisés : tout pour trouver la configuration 
+                parfaite selon votre budget et vos besoins.
+            </p>
 
-            <!-- Badge Réponse rapide -->
-            <div style="display: flex; justify-content: center; margin-bottom: 25px;">
-                <div style="background: linear-gradient(135deg, #FFD700, #FFA500); color: #000; padding: 15px 35px; border-radius: 50px; font-weight: 800; font-size: 1.2em; box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4); display: flex; align-items: center; gap: 12px;">
-                    <span style="font-size: 1.5em;">⚡</span>
-                    Réponse sous 24h
-                </div>
+            <div class="badge-24h">
+                <span style="font-size: 1.5em;">⚡</span>
+                Réponse sous 24h
             </div>
 
             <div class="social-proof">
@@ -407,50 +461,141 @@
                 <div class="proof-badge">💸 Bons plans vérifiés</div>
             </div>
 
-            <a href="https://youtube.com/@arnaudc88?si=DkFurV56E0qP6JvN" target="_blank" class="btn-primary">
+            <a href="https://youtube.com/@arnaudc88?si=DkFurV56E0qP6JvN" target="_blank" class="btn-youtube">
                 📺 Découvrir ma chaîne YouTube
+            </a>
+            
+            <a href="#formulaire" class="btn-youtube" style="background: var(--secondary-purple); color: white; margin-left: 15px;">
+                📩 Demander un conseil
             </a>
         </section>
 
-        <!-- Quiz -->
-        <section class="quiz-section">
-            <h2>🎯 Trouvez votre PC idéal en 30 secondes</h2>
-            <p class="quiz-subtitle">Sélectionnez votre utilisation principale :</p>
+        <!-- PC Selection -->
+        <div class="section-header">
+            <h2>💻 Ma Sélection PC Gamer par Budget</h2>
+            <p>Les meilleurs PC portables testés et approuvés</p>
+        </div>
 
-            <div class="usage-grid">
-                <div class="usage-card" onclick="selectUsage('competitive', this)">
-                    <div class="usage-icon">⚡</div>
-                    <div class="usage-title">Gaming Compétitif</div>
-                    <div class="usage-desc">Valorant, CS2, Fortnite</div>
+        <div class="pc-grid">
+            <!-- PC 1 -->
+            <div class="pc-card">
+                <div class="pc-badge-top" style="background: #667eea">MEILLEUR RAPPORT QUALITÉ/PRIX</div>
+                <div class="pc-image">
+                    <img src="https://www.cdiscount.com/pdt2/q/f/r/1/700x700/83je001qfr/rw/pc-portable-gamer-lenovo-loq-15irx10-15-6-fhd.jpg" alt="LENOVO LOQ">
                 </div>
-
-                <div class="usage-card" onclick="selectUsage('aaa', this)">
-                    <div class="usage-icon">🎮</div>
-                    <div class="usage-title">Gaming AAA</div>
-                    <div class="usage-desc">Cyberpunk, Elden Ring</div>
-                </div>
-
-                <div class="usage-card" onclick="selectUsage('student', this)">
-                    <div class="usage-icon">🎓</div>
-                    <div class="usage-title">Étudiant Gamer</div>
-                    <div class="usage-desc">Gaming + Travail/Études</div>
+                <div class="pc-content">
+                    <h3 class="pc-title">LENOVO LOQ 15IRX10</h3>
+                    <div class="pc-price">999€</div>
+                    <ul class="pc-specs">
+                        <li><strong>Processeur:</strong> Core i5-13450HX</li>
+                        <li><strong>Carte graphique:</strong> RTX 5060 100W</li>
+                        <li><strong>RAM:</strong> 16 Go DDR5</li>
+                        <li><strong>Stockage:</strong> 512 Go SSD</li>
+                        <li><strong>Écran:</strong> 15" FHD 144hz</li>
+                    </ul>
+                    <a href="https://tidd.ly/4pFp7rf" target="_blank" class="pc-link">Voir l'offre →</a>
                 </div>
             </div>
 
-            <div style="display: flex; justify-content: center; margin-top: 25px;">
-                <a href="selection.html" class="usage-card pc-selection-card" style="text-decoration: none; max-width: 400px; width: 100%;">
-                    <div class="usage-icon">💻</div>
-                    <div class="usage-title">Ma Sélection PC Gamer</div>
-                    <div class="usage-desc">Voir tous les PC par budget</div>
+            <!-- PC 2 -->
+            <div class="pc-card">
+                <div class="pc-badge-top" style="background: #ff6b6b">TOP PERFORMANCE -1 500€</div>
+                <div class="pc-image">
+                    <img src="https://www.cdiscount.com/pdt2/h/f/r/1/700x700/83ly007hfr/rw/pc-portable-gamer-lenovo-legion-5-15irx10-sans-w.jpg" alt="Lenovo Legion">
+                </div>
+                <div class="pc-content">
+                    <h3 class="pc-title">Lenovo Legion 5 15IRX10</h3>
+                    <div class="pc-price">1 479€</div>
+                    <ul class="pc-specs">
+                        <li><strong>Processeur:</strong> Core i7-13650HX</li>
+                        <li><strong>Carte graphique:</strong> RTX 5070 115W</li>
+                        <li><strong>RAM:</strong> 32 Go DDR5</li>
+                        <li><strong>Stockage:</strong> 512 Go</li>
+                        <li><strong>Écran:</strong> 15,3" 165 Hz IPS</li>
+                    </ul>
+                    <a href="https://tidd.ly/47TVBbg" target="_blank" class="pc-link">Voir l'offre →</a>
+                </div>
+            </div>
+
+            <!-- PC 3 -->
+            <div class="pc-card">
+                <div class="pc-badge-top" style="background: #00c853">LE PLUS PUISSANT - 2 000€</div>
+                <div class="pc-image">
+                    <img src="https://m.media-amazon.com/images/I/71ruDhbWgjL._AC_SL1500_.jpg" alt="MSI GF63">
+                </div>
+                <div class="pc-content">
+                    <h3 class="pc-title">MSI GF63 Thin</h3>
+                    <div class="pc-price">1 999€</div>
+                    <ul class="pc-specs">
+                        <li><strong>Processeur:</strong> Intel Ultra 7 255HX</li>
+                        <li><strong>Carte graphique:</strong> RTX5070Ti 12GB 175W</li>
+                        <li><strong>RAM:</strong> 16 Go DDR4</li>
+                        <li><strong>Stockage:</strong> SSD 1TB</li>
+                        <li><strong>Écran:</strong> 16" QHD+ 240Hz</li>
+                    </ul>
+                    <a href="https://amzn.to/4s7Hhmx" target="_blank" class="pc-link">Voir l'offre →</a>
+                </div>
+            </div>
+
+            <!-- PC 4 -->
+            <div class="pc-card">
+                <div class="pc-badge-top" style="background: #00bcd4">TOP CONFIGURATION -1 400€</div>
+                <div class="pc-image">
+                    <img src="https://www.cdiscount.com/pdt2/m/f/r/1/700x700/83je003mfr/rw/pc-portable-gamer-lenovo-loq-15irx10-15-fhd-1.jpg" alt="LENOVO LOQ">
+                </div>
+                <div class="pc-content">
+                    <h3 class="pc-title">LENOVO LOQ 15IRX10</h3>
+                    <div class="pc-price">1 399€</div>
+                    <ul class="pc-specs">
+                        <li><strong>Processeur:</strong> Core i7-13650HX</li>
+                        <li><strong>Carte graphique:</strong> RTX 5070 115W</li>
+                        <li><strong>RAM:</strong> 32 Go</li>
+                        <li><strong>Stockage:</strong> SSD 1 To</li>
+                        <li><strong>Écran:</strong> 15" FHD 144hz</li>
+                    </ul>
+                    <a href="https://tidd.ly/4tVSsQU" target="_blank" class="pc-link">Voir l'offre →</a>
+                </div>
+            </div>
+
+            <!-- PC 5 -->
+            <div class="pc-card">
+                <div class="pc-badge-top" style="background: #9c27b0">BON PLAN DU MOMENT</div>
+                <div class="pc-image">
+                    <img src="https://static.fnac-static.com/multimedia/Images/FR/MDM/54/3f/b3/28524372/3756-1/tsp20260202172348/PC-portable-gaming-Asus-TUF-A16-FA608UP-16-FHD-165-Hz-AMD-Ryzen-7-16-Go-RAM-512-Go-D-Nvidia-GeForce-RTX-5070-Gris.jpg">
+                </div>
+                <div class="pc-content">
+                    <h3 class="pc-title">Asus TUF A16</h3>
+                    <div class="pc-price">1 299€</div>
+                    <ul class="pc-specs">
+                        <li><strong>Processeur:</strong> Ryzen 7 260</li>
+                        <li><strong>Carte graphique:</strong> RTX 5070 115W</li>
+                        <li><strong>RAM:</strong> 16 Go DDR5</li>
+                        <li><strong>Stockage:</strong> 512 Go SSD</li>
+                        <li><strong>Écran:</strong> 16" FHD+ 165 Hz</li>
+                    </ul>
+                    <a href="https://tidd.ly/3N0by7R" target="_blank" class="pc-link">Voir l'offre →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Section -->
+        <div class="section-header">
+            <h2>🎬 Ma Dernière Vidéo</h2>
+            <p>Découvrez mes tests et conseils en vidéo</p>
+        </div>
+
+        <div class="video-container">
+            <div class="video-wrapper">
+                <a href="https://www.youtube.com/watch?v=0jk5W8Y4fzo" target="_blank" class="video-link">
+                    <img src="https://i.ytimg.com/vi/0jk5W8Y4fzo/maxresdefault.jpg" alt="Vidéo YouTube" class="video-thumbnail">
+                    <div class="play-button"></div>
                 </a>
             </div>
-        </section>
+        </div>
 
-        <!-- Formulaire -->
-        <section class="form-section" id="form">
-            <h2 style="text-align: center; color: var(--primary-green); margin-bottom: 25px; font-size: 2em;">
-                📋 Recevez votre recommandation personnalisée
-            </h2>
+        <!-- Form Section -->
+        <div class="form-section" id="formulaire">
+            <h2>📋 Recevez votre recommandation personnalisée</h2>
 
             <form id="pc-form">
                 <div class="form-group">
@@ -490,11 +635,11 @@
                     <textarea id="comments" rows="3"></textarea>
                 </div>
 
-                <button type="submit" class="btn-primary" style="width: 100%;">
+                <button type="submit" class="btn-submit">
                     📨 Recevoir ma recommandation
                 </button>
 
-                <div class="affiliate-box">
+                <div class="bonus-box">
                     <strong>💰 Bonus :</strong> Je vous envoie le meilleur prix + bons plans exclusifs
                 </div>
             </form>
@@ -503,50 +648,16 @@
                 <h3>✅ Demande envoyée !</h3>
                 <p>Je reviens vers vous sous 24-48h.</p>
             </div>
-        </section>
+        </div>
     </div>
 
     <script>
-        let selectedUsage = null;
-
-        function selectUsage(usage, element) {
-            selectedUsage = usage;
-            document.querySelectorAll('.usage-card').forEach(btn => btn.classList.remove('selected'));
-            element.classList.add('selected');
-            
-            // Afficher le formulaire directement
-            setTimeout(() => {
-                document.getElementById('form').classList.add('active');
-                document.getElementById('form').scrollIntoView({ behavior: 'smooth' });
-            }, 300);
-        }
-
-        function toggleTheme() {
-            const body = document.body;
-            const current = body.getAttribute('data-theme');
-            const newTheme = current === 'dark' ? 'light' : 'dark';
-            
-            body.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            
-            document.getElementById('theme-icon').textContent = newTheme === 'light' ? '🌙' : '☀️';
-            document.getElementById('theme-text').textContent = newTheme === 'light' ? 'Mode Sombre' : 'Mode Clair';
-        }
-
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.body.setAttribute('data-theme', savedTheme);
-        if (savedTheme === 'dark') {
-            document.getElementById('theme-icon').textContent = '☀️';
-            document.getElementById('theme-text').textContent = 'Mode Clair';
-        }
-
         document.getElementById('pc-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const formData = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
-                usage: selectedUsage || 'non-spécifié',
                 screen: document.getElementById('screen').value,
                 budget: document.getElementById('budget').value,
                 comments: document.getElementById('comments').value
@@ -559,7 +670,7 @@
                     body: JSON.stringify({
                         name: formData.name,
                         email: formData.email,
-                        message: `Utilisation: ${formData.usage}\nÉcran: ${formData.screen}"\nBudget: ${formData.budget}\nCommentaires: ${formData.comments}`,
+                        message: `Écran: ${formData.screen}"\nBudget: ${formData.budget}\nCommentaires: ${formData.comments}`,
                         _subject: `Demande PC Gamer - ${formData.name}`
                     })
                 });
